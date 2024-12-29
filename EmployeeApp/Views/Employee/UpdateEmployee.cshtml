@@ -1,0 +1,60 @@
+﻿@model EmployeeApp.ViewModels.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Update Employee";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Update Employee</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="UpdateEmployee">
+                <!-- Validation Summary -->
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <!-- Employee Name -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Employee Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!-- Employee Salary -->
+                <div class="mb-3">
+                    <label asp-for="Salary" class="form-label">Employee Salary</label>
+                    <input asp-for="Salary" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
+
+                <!-- Department -->
+                <div class="mb-3">
+                    <label asp-for="DepId" class="form-label">Department</label>
+                    <select asp-for="DepId" class="form-select">
+                        @foreach (var dep in Model.DepartmentList)
+                        {
+                            <option value="@dep.Id">@dep.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="DepId" class="text-danger"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back to List -->
+    <div class="mt-3 text-center">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

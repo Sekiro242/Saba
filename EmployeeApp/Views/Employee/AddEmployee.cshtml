@@ -1,0 +1,41 @@
+﻿@model EmployeeApp.ViewModels.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Add Employee Page";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Add New Employee</h2>
+    <form asp-action="AddEmployee" method="post" class="needs-validation" novalidate>
+        <!-- Employee Name -->
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Employee Name</label>
+            <input asp-for="Name" type="text" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Employee Salary -->
+        <div class="mb-3">
+            <label asp-for="Salary" class="form-label">Employee Salary</label>
+            <input asp-for="Salary" type="text" class="form-control" />
+            <span asp-validation-for="Salary" class="text-danger"></span>
+        </div>
+
+        <!-- Department -->
+        <div class="mb-3">
+            <label asp-for="DepId" class="form-label">Department</label>
+            <select asp-for="DepId" class="form-select">
+                @foreach (var dep in Model.DepartmentList)
+                {
+                    <option value="@dep.Id">@dep.Name</option>
+                }
+            </select>
+            <span asp-validation-for="DepId" class="text-danger"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
